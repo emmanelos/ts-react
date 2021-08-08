@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"outDir": "./build/",
+		"sourceMap": true,
+		"noImplicitAny": true,
+		"module": "es6",
+		"target": "es5",
+		"jsx": "react-jsx",
+		"allowJs": true,
+		"moduleResolution": "node",
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"baseUrl": "./",
+		"paths": {
+			"@public/*": ["./public/*"],
+			"@components/*": ["./components/*"],
+			"@styles/*": ["./styles/*"]
+		}
+	},
+	"include": ["src/**/*"]
+}
