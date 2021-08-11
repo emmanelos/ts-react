@@ -1,0 +1,22 @@
+@use "../settings/variables";
+@use "../tools/mixins";
+
+.m-quote {
+	&__attribution {
+		align-items: flex-start;
+		margin-top: 1rem;
+		@include mixins.sidebar($side-width: 3.25rem, $gap: 1.62rem);
+	}
+
+	&__author {
+		margin: 0;
+
+		font-weight: 600;
+		font-size: variables.$fs-body;
+	}
+
+	&__image {
+		max-width: 3.25rem;
+		border-radius: 50%;
+	}
+}

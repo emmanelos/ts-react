@@ -34,7 +34,7 @@ module.exports = {
 				use: [{ loader: 'html-loader' }],
 			},
 			{
-				test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
+				test: /\.(png|svg|jpg|jpeg|gif|ico|jp2|webp)$/i,
 				type: 'asset/resource',
 				exclude: [
 					path.resolve(__dirname, 'public/favicon.ico'),

@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
 		"outDir": "./build/",
+		"rootDirs": ["src/"],
 		"sourceMap": true,
 		"noImplicitAny": true,
 		"module": "es6",
@@ -12,10 +13,10 @@
 		"esModuleInterop": true,
 		"baseUrl": "./",
 		"paths": {
-			"@public/*": ["./public/*"],
-			"@components/*": ["./components/*"],
-			"@styles/*": ["./styles/*"]
+			"@public/*": ["public"],
+			"@components/*": ["src/components"],
+			"@styles/*": ["src/styles"]
 		}
 	},
-	"include": ["src/**/*"]
+	"include": ["src", "@custom-types"]
 }

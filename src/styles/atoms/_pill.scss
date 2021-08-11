@@ -1,0 +1,16 @@
+@use "../settings/variables";
+
+.a-pill {
+	display: inline-block;
+	padding: 0.5rem 0.65rem;
+	border-radius: 50px;
+
+	color: variables.$text-inverted-color;
+	font-weight: 700;
+	font-size: variables.$fs-pill;
+	letter-spacing: 0.5px;
+	text-align: center;
+	text-transform: uppercase;
+
+	background: variables.$background-darker-color;
+}
