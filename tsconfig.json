@@ -11,12 +11,13 @@
 		"moduleResolution": "node",
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
-		"baseUrl": "./",
+		"baseUrl": "src",
 		"paths": {
-			"@public/*": ["public"],
-			"@components/*": ["src/components"],
-			"@styles/*": ["src/styles"]
+			"Public": ["public"],
+			"Components": ["components"],
+			"Images": ["components"],
+			"Styles": ["styles"]
 		}
 	},
-	"include": ["src", "@custom-types"]
+	"include": ["src", "custom-types"]
 }

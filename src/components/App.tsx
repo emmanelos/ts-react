@@ -1,13 +1,17 @@
-import bgCursosCodelytvPro from '../img/bg/cursos-codelytv-pro.png';
-import testimonioJoanMiralles from '../img/testimonios/joan-miralles.jpg';
+import bgCursosCodelytvPro from 'Images/bg/cursos-codelytv-pro.png';
+import testimonioJoanMiralles from 'Images/testimonios/joan-miralles.jpg';
+import novedadesVue3 from 'Images/cursos/novedades-vue-3.jpg';
+import { useState } from 'react';
 
 export const App = () => {
+	const [state, setState] = useState(0);
+
 	return (
-		<div className="app">
+		<div className="app" onClick={() => setState(state + 1)}>
 			<section className="o-container">
-				<h1>Heading 1</h1>
+				<h1>Heading 1 {state}</h1>
 				<h2>Heading 2</h2>
-				<h3>Heading 3</h3>
+				<h3>Heading 4</h3>
 				<p>
 					Text with a <a href="">a link</a>.
 				</p>
@@ -57,7 +61,7 @@ export const App = () => {
 					<img
 						className="m-card__img"
 						alt="Vue 3: Novedades aplicadas al mundo real"
-						src="img/cursos/novedades-vue-3.jpg"
+						src={novedadesVue3}
 					/>
 
 					<h4 className="m-card__title">
