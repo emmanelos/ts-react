@@ -4,9 +4,9 @@ import { webpackCommon }  from './webpack.common';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import { GenerateSW } from 'workbox-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
+import { GenerateSW } from 'workbox-webpack-plugin';
 import * as path from 'path';
 
 exports.default = merge<Configuration>(webpackCommon, {
@@ -16,6 +16,7 @@ exports.default = merge<Configuration>(webpackCommon, {
 			{
 				test: /\.(js|tsx|yyts|tsx)$/,
 				use: [
+					'cache-loader',
 					{
 						loader: 'ts-loader',
 						options: {
@@ -46,11 +47,6 @@ exports.default = merge<Configuration>(webpackCommon, {
 		],
 	},
 	plugins: [
-		//@ts-ignore
-		new GenerateSW({
-			sourcemap: false,
-			swDest: 'service-worker.js',
-		}),
 		new MiniCssExtractPlugin({
 			filename: 'assets/css/[name].[contenthash].css',
 			chunkFilename: 'assets/css/[id].[contenthash].css',
@@ -92,6 +88,10 @@ exports.default = merge<Configuration>(webpackCommon, {
 				parallel: true,
         extractComments: false,
       }),
+					new GenerateSW({
+			sourcemap: false,
+			swDest: 'service-worker.js',
+		}),
 		],
 	},
 });

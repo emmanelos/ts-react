@@ -1,11 +1,11 @@
-import * as webpack from 'webpack';
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+
 // import toml from 'toml';
 // import yaml from 'yamljs';
 // import json5 from 'json5';
 
-export const webpackCommon: webpack.Configuration = {
+export const webpackCommon = {
 	entry: './src/index.tsx',
 	output: {
 		filename: 'assets/js/[name].[contenthash].bundle.js',

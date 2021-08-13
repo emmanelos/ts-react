@@ -7,6 +7,7 @@ import  ReactRefreshTypeScript from 'react-refresh-typescript';
 import * as webpack from 'webpack';
 import * as path from 'path';
 
+// @ts-ignore
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
 }
@@ -62,6 +63,17 @@ exports.default = merge<Configuration>(webpackCommon, {
       warnings: true,
       errors: true,
     },
+		stats: {
+			all: undefined,
+			//@ts-ignore
+			groupModulesByAttributes: true,
+			logging: 'warn',
+			assets: false,
+			modulesSpace: 0,
+			errors: true,
+			builtAt: false,
+			colors: true,
+		},
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),

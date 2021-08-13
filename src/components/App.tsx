@@ -7,13 +7,16 @@ export const App = () => {
 	const [state, setState] = useState(0);
 
 	return (
-		<div className="app" onClick={() => setState(state + 1)}>
+		<div className="app">
+			<button type="button" onClick={() => setState(state + 1)}>
+				Click
+			</button>
 			<section className="o-container">
 				<h1>Heading 1 {state}</h1>
 				<h2>Heading 2</h2>
 				<h3>Heading 4</h3>
 				<p>
-					Text with a <a href="">a link</a>.
+					Text with a <a href="www.github/emmanelos.com">a link</a>.
 				</p>
 			</section>
 			<section className="o-container">
@@ -45,10 +48,12 @@ export const App = () => {
 						sint. Veniam id ea ea ad aute cillum deserunt excepteur.
 					</div>
 					<br />
-					<button className="a-btn a-btn--primary">Primary button</button>
+					<button type="button" className="a-btn a-btn--primary">
+						Primary button
+					</button>
 					<br />
 					<br />
-					<button className="a-btn a-btn--primary a-btn--block">
+					<button type="button" className="a-btn a-btn--primary a-btn--block">
 						Primary block button
 					</button>
 					<br />
@@ -65,7 +70,7 @@ export const App = () => {
 					/>
 
 					<h4 className="m-card__title">
-						<a href="#" target="_blank">
+						<a href="www.github/emmanelos.com" target="_blank">
 							✌️ Vue 3: Novedades aplicadas al mundo real
 						</a>
 					</h4>
@@ -74,7 +79,7 @@ export const App = () => {
 						Veremos cómo exprimir las novedades de Vue 3 con ejemplos reales y
 						aplicando buenas prácticas.
 					</p>
-					<button className="a-btn a-btn--block a-btn--primary">
+					<button type="button" className="a-btn a-btn--block a-btn--primary">
 						Empezar curso
 					</button>
 				</article>
@@ -136,9 +141,10 @@ export const App = () => {
 						className="m-video-thumbnail__img"
 					/>
 					<button
+						type="button"
 						aria-label="Reproducir Vídeo introducción cursos CodelyTV Pro"
 						className="m-video-thumbnail__play m-video-thumbnail__play--large"
-					></button>
+					/>
 				</div>
 			</section>
 		</div>
