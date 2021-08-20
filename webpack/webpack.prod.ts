@@ -23,7 +23,6 @@ exports.default = merge<Configuration>(webpackCommon, {
 						options: {
 							loader: 'tsx',
 							target: 'es2015',
-							css: true,
 						},
 					},
 				],
@@ -74,7 +73,8 @@ exports.default = merge<Configuration>(webpackCommon, {
 		splitChunks: false,
 		minimizer: [
 			new ESBuildMinifyPlugin({
-				target: 'es2015', // Syntax to compile to (see options below for possible values)
+				target: 'es2015',
+				css: true,
 			}),
 		],
 	},
