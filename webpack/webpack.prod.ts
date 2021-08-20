@@ -1,6 +1,6 @@
-import { Configuration } from "webpack";
-import { merge }  from 'webpack-merge';
-import { webpackCommon }  from './webpack.common';
+import { Configuration } from 'webpack';
+import { merge } from 'webpack-merge';
+import { webpackCommon } from './webpack.common';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
@@ -8,6 +8,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import { GenerateSW } from 'workbox-webpack-plugin';
 import * as path from 'path';
+const { ESBuildMinifyPlugin } = require('esbuild-loader');
 
 exports.default = merge<Configuration>(webpackCommon, {
 	mode: 'production',
@@ -18,19 +19,20 @@ exports.default = merge<Configuration>(webpackCommon, {
 				use: [
 					'cache-loader',
 					{
-						loader: 'ts-loader',
+						loader: 'esbuild-loader',
 						options: {
-							happyPackMode: true,
-							transpileOnly: true,
+							loader: 'tsx',
+							target: 'es2015',
+							css: true,
 						},
-					}
+					},
 				],
 				include: path.resolve(__dirname, '../src'),
 				exclude: /node_modules/,
 			},
 			{
 				test: /\.html$/,
-				use: [ 'cache-loader', 'html-loader' ],
+				use: ['cache-loader', 'html-loader'],
 				include: path.resolve(__dirname, '../public'),
 			},
 			{
@@ -55,43 +57,25 @@ exports.default = merge<Configuration>(webpackCommon, {
 			patterns: [
 				{ from: 'public/favicon.ico', to: 'assets/img' },
 				{ from: 'public/logo192.png', to: 'assets/img' },
-				{ from: 'public/logo512.png', to: 'assets/img' }
+				{ from: 'public/logo512.png', to: 'assets/img' },
 			],
 		}),
 		new CleanWebpackPlugin(),
-		
+		new GenerateSW({
+			sourcemap: false,
+			swDest: 'service-worker.js',
+		}),
 	],
 	optimization: {
 		minimize: true,
 		runtimeChunk: true,
 		removeAvailableModules: false,
-    removeEmptyChunks: false,
-    splitChunks: false,
+		removeEmptyChunks: false,
+		splitChunks: false,
 		minimizer: [
-			new CssMinimizerPlugin({
-				minimizerOptions: {
-          preset: [
-            "default",
-            {
-              discardComments: { removeAll: true },
-            },
-          ],
-        },
-				parallel: true
+			new ESBuildMinifyPlugin({
+				target: 'es2015', // Syntax to compile to (see options below for possible values)
 			}),
-			new TerserPlugin({
-        terserOptions: {
-          format: {
-            comments: false,
-          },
-        },
-				parallel: true,
-        extractComments: false,
-      }),
-					new GenerateSW({
-			sourcemap: false,
-			swDest: 'service-worker.js',
-		}),
 		],
 	},
 });
