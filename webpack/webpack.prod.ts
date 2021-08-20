@@ -1,6 +1,6 @@
-import { Configuration } from "webpack";
-import { merge }  from 'webpack-merge';
-import { webpackCommon }  from './webpack.common';
+import { Configuration } from 'webpack';
+import { merge } from 'webpack-merge';
+import { webpackCommon } from './webpack.common';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
@@ -14,7 +14,7 @@ exports.default = merge<Configuration>(webpackCommon, {
 	module: {
 		rules: [
 			{
-				test: /\.(js|tsx|yyts|tsx)$/,
+				test: /\.(js|jsx|ts|tsx)$/,
 				use: [
 					'cache-loader',
 					{
@@ -23,14 +23,14 @@ exports.default = merge<Configuration>(webpackCommon, {
 							happyPackMode: true,
 							transpileOnly: true,
 						},
-					}
+					},
 				],
 				include: path.resolve(__dirname, '../src'),
 				exclude: /node_modules/,
 			},
 			{
 				test: /\.html$/,
-				use: [ 'cache-loader', 'html-loader' ],
+				use: ['cache-loader', 'html-loader'],
 				include: path.resolve(__dirname, '../public'),
 			},
 			{
@@ -55,43 +55,42 @@ exports.default = merge<Configuration>(webpackCommon, {
 			patterns: [
 				{ from: 'public/favicon.ico', to: 'assets/img' },
 				{ from: 'public/logo192.png', to: 'assets/img' },
-				{ from: 'public/logo512.png', to: 'assets/img' }
+				{ from: 'public/logo512.png', to: 'assets/img' },
 			],
 		}),
 		new CleanWebpackPlugin(),
-		
+		new GenerateSW({
+			sourcemap: false,
+			swDest: 'service-worker.js',
+		}),
 	],
 	optimization: {
 		minimize: true,
 		runtimeChunk: true,
 		removeAvailableModules: false,
-    removeEmptyChunks: false,
-    splitChunks: false,
+		removeEmptyChunks: false,
+		splitChunks: false,
 		minimizer: [
 			new CssMinimizerPlugin({
 				minimizerOptions: {
-          preset: [
-            "default",
-            {
-              discardComments: { removeAll: true },
-            },
-          ],
-        },
-				parallel: true
+					preset: [
+						'default',
+						{
+							discardComments: { removeAll: true },
+						},
+					],
+				},
+				parallel: true,
 			}),
 			new TerserPlugin({
-        terserOptions: {
-          format: {
-            comments: false,
-          },
-        },
+				terserOptions: {
+					format: {
+						comments: false,
+					},
+				},
 				parallel: true,
-        extractComments: false,
-      }),
-					new GenerateSW({
-			sourcemap: false,
-			swDest: 'service-worker.js',
-		}),
+				extractComments: false,
+			}),
 		],
 	},
 });
