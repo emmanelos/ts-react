@@ -58,11 +58,13 @@ exports.default = merge<Configuration>(webpackCommon, {
 				{ from: 'public/logo512.png', to: 'assets/img' },
 			],
 		}),
-		new CleanWebpackPlugin(),
+		//@ts-ignore
 		new GenerateSW({
 			sourcemap: false,
 			swDest: 'service-worker.js',
 		}),
+		//@ts-ignore
+		new CleanWebpackPlugin(),
 	],
 	optimization: {
 		minimize: true,
