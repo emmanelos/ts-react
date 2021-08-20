@@ -1,0 +1,36 @@
+@use "../settings/variables";
+
+.m-card {
+	padding: 1rem;
+	border-radius: 5px;
+
+	color: variables.$text-muted-color;
+
+	background: variables.$background-lighter-color;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+	&__img {
+		display: block;
+		width: calc(100% + 2rem);
+		max-width: none;
+		border-radius: 5px 5px 0 0;
+		margin: -1rem -1rem 0;
+	}
+
+	&__title {
+		margin-bottom: 0.5rem;
+
+		font-weight: 400;
+		font-size: variables.$fs-lead;
+		line-height: 1.3;
+
+		a {
+			text-decoration: none;
+		}
+	}
+
+	&__meta {
+		display: block;
+		margin-bottom: 0.5rem;
+	}
+}

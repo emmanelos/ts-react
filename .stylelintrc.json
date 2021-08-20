@@ -274,14 +274,7 @@
 			{
 				"groupName": "special",
 				"emptyLineBefore": "always",
-				"properties": [
-					"composes",
-					"@import",
-					"@use",
-					"@extend",
-					"@mixin",
-					"@at-root"
-				]
+				"properties": ["composes", "@use", "@extend", "@mixin", "@at-root"]
 			}
 		]
 	}

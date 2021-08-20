@@ -1,0 +1,37 @@
+@use "../settings/variables";
+
+.a-btn {
+	display: inline-block;
+	padding: 0.75rem 1.87rem;
+	border: none;
+	border-radius: 0.3rem;
+
+	font-weight: 600;
+	font-size: variables.$fs-btn;
+	letter-spacing: 0.03em;
+	text-align: center;
+	text-transform: uppercase;
+	text-decoration: none;
+
+	cursor: pointer;
+
+	transition: all 0.2s;
+
+	&--block {
+		display: block;
+		width: 100%;
+	}
+
+	&--primary {
+		color: variables.$text-inverted-color;
+
+		background: variables.$primary-color;
+
+		&:hover,
+		&:focus {
+			color: variables.$text-inverted-color;
+
+			background: variables.$primary-dark-color;
+		}
+	}
+}
