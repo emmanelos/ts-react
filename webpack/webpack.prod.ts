@@ -75,6 +75,8 @@ exports.default = merge<Configuration>(webpackCommon, {
 			new ESBuildMinifyPlugin({
 				target: 'es2015',
 				css: true,
+				include: /src/,
+				exclude: /node_modules/,
 			}),
 		],
 	},
