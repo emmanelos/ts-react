@@ -1,15 +1,12 @@
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import { merge } from 'webpack-merge';
-import { webpackCommon }  from './webpack.common';
-import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
-import  ReactRefreshTypeScript from 'react-refresh-typescript';
-import * as webpack from 'webpack';
+import { webpackCommon } from './webpack.common';
 import * as path from 'path';
 
 // @ts-ignore
 interface Configuration extends WebpackConfiguration {
-  devServer?: WebpackDevServerConfiguration;
+	devServer?: WebpackDevServerConfiguration;
 }
 
 exports.default = merge<Configuration>(webpackCommon, {
@@ -21,14 +18,11 @@ exports.default = merge<Configuration>(webpackCommon, {
 				test: /\.(js|tsx|ts|tsx)$/,
 				use: [
 					{
-					loader: 'ts-loader',
-					options: {
-					transpileOnly: true,
-					getCustomTransformers: () => ({
-                before: [ReactRefreshTypeScript()],
-              }),
-				},
-					}
+						loader: 'ts-loader',
+						options: {
+							transpileOnly: true,
+						},
+					},
 				],
 				include: path.resolve(__dirname, '../src'),
 				exclude: /node_modules/,
@@ -52,31 +46,33 @@ exports.default = merge<Configuration>(webpackCommon, {
 		],
 	},
 	devServer: {
-		contentBase: path.join(__dirname, '../dist'),
+		static: {
+			directory: path.join(__dirname, 'public'),
+		},
 		compress: true,
 		port: 3000,
 		hot: true,
 		open: {
-			app: ['msedge', '--inprivate']
+			app: {
+				name: 'msedge',
+				arguments: ['--inprivate'],
+			},
 		},
-		overlay: {
-      warnings: true,
-      errors: true,
-    },
-		stats: {
-			all: undefined,
-			//@ts-ignore
-			groupModulesByAttributes: true,
-			logging: 'warn',
-			assets: false,
-			modulesSpace: 0,
-			errors: true,
-			builtAt: false,
-			colors: true,
+		client: {
+			overlay: true,
+		},
+		devMiddleware: {
+			stats: {
+				all: undefined,
+				//@ts-ignore
+				groupModulesByAttributes: true,
+				logging: 'warn',
+				assets: false,
+				modulesSpace: 0,
+				errors: true,
+				builtAt: false,
+				colors: true,
+			},
 		},
 	},
-	plugins: [
-		new webpack.HotModuleReplacementPlugin(),
-		new ReactRefreshWebpackPlugin(),
-	]
 });
