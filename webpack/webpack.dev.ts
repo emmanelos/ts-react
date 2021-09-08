@@ -1,10 +1,9 @@
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import { merge } from 'webpack-merge';
-import { webpackCommon } from './webpack.common';
 import * as path from 'path';
+import { webpackCommon } from './webpack.common';
 
-// @ts-ignore
 interface Configuration extends WebpackConfiguration {
 	devServer?: WebpackDevServerConfiguration;
 }
@@ -64,7 +63,6 @@ exports.default = merge<Configuration>(webpackCommon, {
 		devMiddleware: {
 			stats: {
 				all: undefined,
-				//@ts-ignore
 				groupModulesByAttributes: true,
 				logging: 'warn',
 				assets: false,

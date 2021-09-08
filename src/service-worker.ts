@@ -8,6 +8,10 @@ import {
 	NetworkFirst,
 } from 'workbox-strategies';
 import * as googleAnalytics from 'workbox-google-analytics';
+import {} from '.';
+
+// eslint-disable-next-line no-undef
+declare let self: ServiceWorkerGlobalScope;
 
 clientsClaim();
 
@@ -41,7 +45,7 @@ googleAnalytics.initialize({
 
 // STALE WHILE REVALIDATE
 
-//PNG files
+// PNG files
 registerRoute(
 	({ url }) =>
 		url.origin === self.location.origin && url.pathname.endsWith('.png'),
@@ -51,7 +55,7 @@ registerRoute(
 	}),
 );
 
-//ICO Files
+// ICO Files
 registerRoute(
 	({ url }) =>
 		url.origin === self.location.origin && url.pathname.endsWith('.ico'),
@@ -61,7 +65,7 @@ registerRoute(
 	}),
 );
 
-//SVG Files
+// SVG Files
 registerRoute(
 	({ url }) =>
 		url.origin === self.location.origin && url.pathname.endsWith('.svg'),
@@ -73,7 +77,7 @@ registerRoute(
 
 // CACHE FIRST
 
-//TTF Files
+// TTF Files
 registerRoute(
 	({ url }) =>
 		url.origin === self.location.origin && url.pathname.endsWith('.ttf'),
@@ -95,7 +99,6 @@ registerRoute(({ url }) => url.pathname.startsWith('/'), new NetworkFirst());
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
 self.addEventListener('message', (event) => {
 	if (event.data && event.data.type === 'SKIP_WAITING') {
-		// @ts-ignore
 		self.skipWaiting();
 	}
 });
