@@ -51,12 +51,7 @@ exports.default = merge<Configuration>(webpackCommon, {
 		compress: true,
 		port: 3000,
 		hot: true,
-		open: {
-			app: {
-				name: 'msedge',
-				arguments: ['--inprivate'],
-			},
-		},
+		open: true,
 		client: {
 			overlay: true,
 		},
