@@ -2,6 +2,8 @@ import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import { merge } from 'webpack-merge';
 import * as path from 'path';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import transformer from 'react-refresh-typescript';
 import { webpackCommon } from './webpack.common';
 
 interface Configuration extends WebpackConfiguration {
@@ -14,17 +16,19 @@ exports.default = merge<Configuration>(webpackCommon, {
 	module: {
 		rules: [
 			{
-				test: /\.(js|tsx|ts|tsx)$/,
+				test: /\.[jt]sx?$/,
+				exclude: /node_modules/,
 				use: [
 					{
 						loader: 'ts-loader',
 						options: {
+							getCustomTransformers() {
+								return { before: [transformer({})] };
+							},
 							transpileOnly: true,
 						},
 					},
 				],
-				include: path.resolve(__dirname, '../src'),
-				exclude: /node_modules/,
 			},
 			{
 				test: /\.html$/,
@@ -44,6 +48,12 @@ exports.default = merge<Configuration>(webpackCommon, {
 			},
 		],
 	},
+	plugins: [
+		new ReactRefreshWebpackPlugin({
+			// Remove overlay when ReactRefreshWebpackPlugin overlays webpack-dev-server 5
+			overlay: false,
+		}),
+	],
 	devServer: {
 		static: {
 			directory: path.join(__dirname, 'public'),
